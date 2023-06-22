@@ -107,7 +107,7 @@ defmodule PrometheusParser do
   prom_key_value =
     prom_label
     |> tag(:pair_key)
-    |> ignore(string("=\"")
+    |> ignore(string("=\""))
     |> optional(utf8_string([{:not, ?"}], min: 0))
     |> label("expected a-z,A-Z,0-9,\-")
     |> tag(:pair_value)
