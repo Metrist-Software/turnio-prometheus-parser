@@ -90,7 +90,7 @@ defmodule PrometheusParser do
     |> concat(prom_label)
     |> tag(:prom_label)
     |> ignore(string(" "))
-    |> concat(documentation)
+    |> concat(optional(documentation))
 
   type =
     string("TYPE")
@@ -99,6 +99,8 @@ defmodule PrometheusParser do
     |> concat(prom_label)
     |> ignore(string(" "))
     |> choice([
+      string("summary"),
+      string("histogram"),
       string("gauge"),
       string("counter")
     ])
